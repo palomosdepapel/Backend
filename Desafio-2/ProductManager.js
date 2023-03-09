@@ -1,3 +1,7 @@
+const fs = require('fs')
+const path = './files/products.json'
+
+
 productsArray = [
     {
         id: 1,
