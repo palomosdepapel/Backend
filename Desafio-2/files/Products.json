@@ -1,0 +1,20 @@
+[
+	{
+		"title": "Reloj Diesel On",
+		"description": "Reloj diesel analogo y digital, para hombre, tablero redondo color negro, estilo sin numeros, pulso lona color azul , Diámetro: 48.00mm , Resistencia al agua: 5 bares",
+		"thumb": "https://kevins.com.co/img/productos/7606000992.jpg",
+		"price": 690000,
+		"code": "1",
+		"stock": 5,
+		"id": 1
+	},
+	{
+		"title": "Reloj Jeans Análogo",
+		"description": "Reloj jeans análogo, para dama, tablero redondo colores rosado y plateado, estilo puntos + arabigo, pulso acero color plateado , Diámetro: 22.70mm , Resistencia al agua: 1 bar",
+		"thumb": "https://kevins.com.co/img/productos/7206001111.jpg",
+		"price": 150000,
+		"code": "2",
+		"stock": 5,
+		"id": 2
+	}
+]
