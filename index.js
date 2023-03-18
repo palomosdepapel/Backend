@@ -9,7 +9,7 @@ const PORT = 8080
 
 // req.query
 
-// req.params
+
 
 // ruta
 app.get('/saludo', (req, res)=>{
@@ -21,11 +21,11 @@ app.get('/bienvenido', (req, res)=>{
     res.send('<h1 style="color:blue">Hola mundo</h1>')
 } )
 
-// ejercicio get endpoint response
-app.get('/usuario/:nombre', (req, res)=>{
+// req.params
+app.get('/usuario/:nombre/:apellido', (req, res)=>{
     console.log('params',req.params.nombre)
-    const {nombre} = req.params 
-    res.send({nombre: nombre , apellido:'huertas', email:'jhuertas@dominio.com', edad: 55})
+    const {nombre,apellido} = req.params 
+    res.send({nombre: nombre , apellido: apellido, email:'jhuertas@dominio.com', edad: 55})
 } )
 
 app.listen(PORT , () =>{
