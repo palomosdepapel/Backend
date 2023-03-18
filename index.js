@@ -43,7 +43,12 @@ app.get('/', (req, res)=>{
 // devuelve el usuario ID
 app.get('/:userId', (req, res)=>{
     const { userId } = req.params
-    res.send(users.find(user => user.id == userId))
+
+    const user = users.find((user) => user.id == userId)
+    // en caso de no encontrar usuarios
+    if( !user ) return res.send('No se encontró el usuario')
+
+    res.send(user)
 } )
 
 
