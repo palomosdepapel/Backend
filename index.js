@@ -5,19 +5,27 @@ const app = express()
 
 const PORT = 8080
 
+
+
+// req.query
+
+// req.params
+
 // ruta
 app.get('/saludo', (req, res)=>{
     res.send("Hola profe")
 } )
 
-// ejercicio
+// ejercicio get endpoint response
 app.get('/bienvenido', (req, res)=>{
     res.send('<h1 style="color:blue">Hola mundo</h1>')
 } )
 
-// ejercicio
-app.get('/usuario', (req, res)=>{
-    res.send({nombre:'juan', apellido:'huertas', email:'jhuertas@dominio.com', edad: 55})
+// ejercicio get endpoint response
+app.get('/usuario/:nombre', (req, res)=>{
+    console.log('params',req.params.nombre)
+    const {nombre} = req.params 
+    res.send({nombre: nombre , apellido:'huertas', email:'jhuertas@dominio.com', edad: 55})
 } )
 
 app.listen(PORT , () =>{
