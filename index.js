@@ -7,7 +7,7 @@ const PORT = 8080
 
 
 
-// req.query
+
 
 
 
@@ -21,6 +21,10 @@ app.get('/bienvenido', (req, res)=>{
     res.send('<h1 style="color:blue">Hola mundo</h1>')
 } )
 
+// manejo peticiones json
+app.use(express.json())
+// interpretación y mapeo en req.query
+app.use(express.urlencoded({extended:true}))
 
 //array
 const users = [
@@ -63,6 +67,26 @@ app.listen(PORT , () =>{
     console.log('Servidor iniciado en el puerto ' + PORT)
 })
 
+// req.query http://localhost:8080/api/queryx?nombre=Martin&apellido=Brumana
+app.get('/api/queryx', (req, res)=>{
+    console.log(req.query)
+    const {nombre,apellido} = req.query
+    res.send({nombre, apellido})
+} )
+
+
+// ejemplo filtro género http://localhost:8080/api/query?genero=f
+
+app.get('/api/query', (req, res)=>{
+    console.log(req.query)
+    const {genero} = req.query
+
+    let userfilter = users.filter((user) => user.genero == genero)
+    // http://localhost:8080/api/query?genero=X
+    if( !genero || ( genero != 'f' && genero != 'm' ) ) return res.send('No se encontró el género')
+    //console.log(genero)
+    res.send(userfilter)
+} )
 
 
 /* const http = require('http')
