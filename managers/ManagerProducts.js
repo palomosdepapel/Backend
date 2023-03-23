@@ -1,4 +1,16 @@
 import fs from "fs";
+import express from 'express';
+
+const app = express();
+
+app.use(express.json()) 
+const server = app.listen(8080,()=>console.log("Listening on PORT 8080"));
+
+let frase = "Frase inicial";
+
+app.get('/api/frase',(req,res)=>{
+    res.send({frase});
+})
 
 const path = "./files/Products.json";
 export default class ManagerProducts {
