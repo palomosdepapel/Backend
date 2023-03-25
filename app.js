@@ -10,8 +10,8 @@ import ManagerProducts from "./managers/ManagerProducts.js";
 
 const manager = new ManagerProducts();
 const env = async() =>{
-    let primeraConsultaProductos = await manager.consultarProductos();
-    //console.log(primeraConsultaProductos); //Empty return
+    let firstProductConsult = await manager.productConsult();
+    //console.log(firstProductConsult); //Empty return
     let product = {
         title: 'Reloj Jeans Análogo',
         description: 'Reloj jeans análogo, para dama, tablero redondo colores rosado y plateado, estilo puntos + arabigo, pulso acero color plateado , Diámetro: 22.70mm , Resistencia al agua: 1 bar',
@@ -20,9 +20,9 @@ const env = async() =>{
         code: '2',
         stock: 5
     }
-    let result = await manager.crearProducto(product);
+    let result = await manager.newProduct(product);
     //console.log(result); //Product ID return
-    let segundaConsultaProductos = await manager.consultarProductos();
-    //console.log(segundaConsultaProductos); //Product inserted return
+    let secondProductConsult = await manager.productConsult();
+    //console.log(secondProductConsult); //Product inserted return
 }
 env();

@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json()) 
 const server = app.listen(8080,()=>console.log("Listening on PORT 8080"));
 
-let frase = "Frase inicial";
+//let frase = "Frase inicial";
 
 app.get('/api/frase',(req,res)=>{
     res.send({frase});
@@ -20,7 +20,7 @@ export default class ManagerProducts {
     this.lastId = 0;
   }
 
-  consultarProductos = async () => {
+  productConsult = async () => {
     if (fs.existsSync(path)) {
       const data =
         await fs.promises.readFile(
@@ -34,17 +34,17 @@ export default class ManagerProducts {
       return []; // Empty Array
     }
   };
-  crearProducto = async (producto) => {
+  newProduct = async (theProduct) => {
     const products =
-      await this.consultarProductos();
+      await this.productConsult();
     if (products.length === 0) {
-      producto.id = 1;
+      theProduct.id = 1;
     } else {
-      producto.id =
+      theProduct.id =
         products[products.length - 1]
           .id + 1;
     }
-    products.push(producto);
+    products.push(theProduct);
     await fs.promises.writeFile(
       path,
       JSON.stringify(
@@ -53,6 +53,6 @@ export default class ManagerProducts {
         "\t"
       )
     );
-    return producto;
+    return theProduct;
   };
 }
