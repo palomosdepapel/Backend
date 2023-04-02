@@ -1,57 +1,47 @@
-const express = require('express');
-const {
-    getId,
-    cleanHtml,
-    convertBool,
-    checkboxBool,
-    safeParseInt,
-    getImages
-} = require('../lib/common');
+const mongoose = require('mongoose');
 
-const fs = require('fs');
-const path = require('path');
-const router = express.Router();
-
-
-router.get('/products/:page?', restrict, async (req, res, next) => {
-    let pageNum = 1;
-    if(req.params.page){
-        pageNum = req.params.page;
-    }
-
-    // Get our paginated data
-    const products = await paginateData(false, req, pageNum, 'products', {}, { productAddedDate: -1 });
-
-    res.render('products', {
-        title: 'Cart - Products',
-        results: products.data,
-        totalItemCount: products.totalItems,
-        pageNum,
-        paginateUrl: 'admin/products',
-        resultType: 'top',
-        session: req.session,
-        admin: true,
-        config: req.app.config,
-        message: clearSessionValue(req.session, 'message'),
-        messageType: clearSessionValue(req.session, 'messageType'),
-        helpers: req.handlebars.helpers
-    });
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
 });
 
-// insert form
-router.get('/admin/product/new', restrict, checkAccess, (req, res) => {
-    res.render('product-new', {
-        title: 'New product',
-        session: req.session,
-        productTitle: clearSessionValue(req.session, 'productTitle'),
-        productDescription: clearSessionValue(req.session, 'productDescription'),
-        productPrice: clearSessionValue(req.session, 'productPrice'),
-        productPermalink: clearSessionValue(req.session, 'productPermalink'),
-        message: clearSessionValue(req.session, 'message'),
-        messageType: clearSessionValue(req.session, 'messageType'),
-        editor: true,
-        admin: true,
-        helpers: req.handlebars.helpers,
-        config: req.app.config
-    });
-});
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;
+
+// ruta para obtener todos los productos
+app.get('/products', async (req, res) => {
+    const allProducts = await Product.find();
+    res.json(allProducts);
+  });
+  
+  // ruta para obtener un producto por su ID
+  app.get('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    res.json(product);
+  });
+
+  //crear nuevo producto
+  app.post('/products', async (req, res) => {
+    const newProduct = req.body;
+    const createdProduct = await Product.create(newProduct);
+    res.json(createdProduct);
+  });
+
+  //actualizar producto existente
+  app.put('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedProduct = req.body;
+    const product = await Product.findByIdAndUpdate(id, updatedProduct, { new: true });
+    res.json(product);
+  });
+
+  //eliminar un producto existente
+  app.delete('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const deletedProduct = await Product.findByIdAndDelete(id);
+    res.json(deletedProduct);
+  });
+  
+  
