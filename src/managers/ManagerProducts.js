@@ -12,7 +12,7 @@ app.get('/api/frase',(req,res)=>{
     res.send({frase});
 })
 
-const path = "./files/Products.json";
+const path = "./src/files/Products.json";
 export default class ManagerProducts {
   
   constructor() {

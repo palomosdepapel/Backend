@@ -1,15 +1,17 @@
-const fs = require('fs');
-const path = require('path');
-const express = require('express');
+//const fs = require('fs');
+//const path = require('path');
+//const express = require('express');
 
-import express  from 'express'
+import express  from 'express';
+//import require  from 'require';
+import path  from 'path';
 
 const app = express()
 
 const PORT = 8080
 
 
-import ManagerProducts from "./managers/ManagerProducts.js";
+import ManagerProducts from "./src/managers/ManagerProducts.js";
 
 const manager = new ManagerProducts();
 const env = async() =>{
