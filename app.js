@@ -1,19 +1,25 @@
-//const fs = require('fs');
-//const path = require('path');
-//const express = require('express');
-
-import express  from 'express';
-//import require  from 'require';
-import path  from 'path';
+const express = require('express')
+const routerApp = require('./src/routes/')
+//const { objConfig } = require('./config/config.js')
 
 const app = express()
-
 const PORT = 8080
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
-import ManagerProducts from "./src/managers/ManagerProducts.js";
+app.use(routerApp)
 
-const manager = new ManagerProducts();
+app.listen(PORT, err=>{
+    if(err) {
+        console.log(err)
+    }
+    console.log(`Server is running on port ${PORT}`)
+})
+
+//import ManagerProducts from "./src/managers/ManagerProducts.js";
+
+/* const manager = new ManagerProducts();
 const env = async() =>{
     let firstProductConsult = await manager.productConsult();
     //console.log(firstProductConsult); //Empty return
@@ -26,8 +32,6 @@ const env = async() =>{
         stock: 5
     }
     let result = await manager.newProduct(product);
-    //console.log(result); //Product ID return
     let secondProductConsult = await manager.productConsult();
-    //console.log(secondProductConsult); //Product inserted return
 }
-env();
+env(); */

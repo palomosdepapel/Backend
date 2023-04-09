@@ -1,4 +1,29 @@
-const mongoose = require('mongoose');
+const {Router} = require('express')
+
+const router = Router()
+
+router.get('/', (req, res)=>{
+    res.send('get product')
+})
+router.get('/:pid', (req, res)=>{
+    res.send('get product de ID')
+})
+router.post('/', (req, res)=>{
+    res.send('post product')
+})
+router.put('/:pid', (req, res)=>{
+    res.send('update product')
+})
+router.delete('/:pid', (req, res)=>{
+    res.send('delete product')
+})
+
+module.exports = router
+
+
+
+
+/* const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -43,5 +68,5 @@ app.get('/products', async (req, res) => {
     const deletedProduct = await Product.findByIdAndDelete(id);
     res.json(deletedProduct);
   });
-  
+   */
   
